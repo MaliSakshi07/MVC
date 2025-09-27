@@ -1,0 +1,70 @@
+﻿@model CRUD_App.Models.CompanyModel
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .cen {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br />
+    <div class="container mt-5">
+        <div class="row cen">
+            <div class="col-md-6 bg-success p-4 rounded shadow">
+                <h4 class="text-center text-white mb-4">Company Create</h4>
+                <hr class="bg-white" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label text-white text-end">
+                        @Html.DisplayNameFor(model => model.Comp_Name)
+                    </label>
+                    <div class="col-sm-8">
+                        @Html.EditorFor(model => model.Comp_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Comp_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label text-white text-end">
+                        @Html.DisplayNameFor(model => model.Stength)
+                    </label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(Model => Model.Stength, new { @data_val = "false", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Stength, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label text-white text-end">
+                        @Html.DisplayNameFor(model => model.Remarks)
+                    </label>
+                    <div class="col-sm-8">
+                        @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row " style="padding-top:15px;margin-bottom:5px;">
+                    <div class="col-sm-offset-4">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="button" value="Back To Index" class="btn btn-warning" onclick="BackToIndex();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function BackToIndex() {
+        window.location.href = '@Url.Action("Index","Company")'
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
